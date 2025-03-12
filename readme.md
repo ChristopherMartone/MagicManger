@@ -1,7 +1,5 @@
 # 🚀 MagicManager - Development Setup (macOS)
 
-MagicManager is a **Qt-based** application that loads and manages card collections from an SQLite database.
-
 ## 📌 Prerequisites
 Before setting up the project, ensure you have the following installed:
 
