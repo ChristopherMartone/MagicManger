@@ -10,6 +10,21 @@
 #include "AssetManagers/DatabaseManager.cpp"
 #include "string"
 #include <QFile>
+#include <iostream> 
+
+
+void printMemoryUsage() {
+    struct rusage usage;
+    if (getrusage(RUSAGE_SELF, &usage) == 0) {
+        #ifdef __APPLE__z
+            std::cout << "Memory Usage: " << (usage.ru_maxrss / 1024) << " KB" << std::endl;
+        #else
+            std::cout << "Memory Usage: " << usage.ru_maxrss << " KB" << std::endl;
+        #endif
+    } else {
+        std::cerr << "Error getting memory usage!" << std::endl;
+    }
+}
 
 // Save collection to file
 void saveCollectionToFile(const Collection& collection, const QString& filePath) {
@@ -28,7 +43,7 @@ Collection loadCollectionFromFile(const QString& filePath) {
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly)) {
         qDebug() << "Error opening file for loading:" << file.errorString();
-        return Collection("All Cards", "All cards in the database", "2025-03-11", "2025-03-11");
+        return Collection("All Cards", "All cards in the database");
     }
     QDataStream in(&file);
     Collection collection;
@@ -99,6 +114,7 @@ int main(int argc, char *argv[]) {
 
     // Show the main window
     window.show();
+    printMemoryUsage();
 
     return app.exec();
 }
