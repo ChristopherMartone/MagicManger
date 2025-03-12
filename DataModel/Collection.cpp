@@ -1,9 +1,23 @@
 #include "Collection.hpp"
 #include <algorithm>  // Required for std::remove
 
-Collection::Collection(const std::string& name, const std::string& description, 
-                       const std::string& dateCreated, const std::string& dateModified)
-    : name(name), description(description), dateCreated(dateCreated), dateModified(dateModified) {}
+Collection::Collection(const std::string& name, const std::string& description)
+    : name(name), description(description), dateCreated(dateCreated), dateModified(dateModified) {
+        this->dateCreated = DateTime::instance().getCurrentDateTimeString();
+        this->dateModified = DateTime::instance().getCurrentDateTimeString();
+    }
+
+bool Collection::operator==(const Collection& other) const {
+    return name == other.name &&
+           description == other.description &&
+           dateCreated == other.dateCreated &&
+           dateModified == other.dateModified &&
+           cards == other.cards;
+}
+
+void Collection::updateDateModified() {
+    this->dateModified = DateTime::instance().getCurrentDateTimeString();
+}
 
 // Save Collection to QDataStream
 QDataStream& operator<<(QDataStream& out, const Collection& collection) {

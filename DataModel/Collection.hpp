@@ -6,12 +6,14 @@
 #include "Card.hpp"
 #include <QDataStream>
 #include <QString>
+#include "../Utils/DateTime.hpp" 
 
 class Collection {
 public:
     Collection() = default;
-    Collection(const std::string& name, const std::string& description, 
-               const std::string& dateCreated, const std::string& dateModified);
+    Collection(const std::string& name, const std::string& description);
+
+    bool operator==(const Collection& other) const;
 
     const std::string& getName() const;
     const std::string& getDescription() const;
@@ -20,6 +22,7 @@ public:
 
     void addCard(const Card& card);
     void removeCard(const Card& card);
+    void updateDateModified();
     
     const std::vector<Card>& getCards() const;
     void getCardNames(std::vector<std::string>& outNames) const;
