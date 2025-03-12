@@ -1,0 +1,56 @@
+# Ignore compiled object files
+*.o
+*.obj
+
+# Ignore Qt build artifacts
+Makefile
+*.moc
+moc_*
+ui_*
+qrc_*
+*.qmake.stash
+*.pro.user
+*.pro.user.*
+*.app
+*.exe
+*.dll
+*.dylib
+*.so
+
+# Ignore build directories
+build/
+bin/
+dist/
+release/
+debug/
+
+# Ignore SQLite database files
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.db
+*.db-journal
+Data/AllPrintings.json
+
+# Ignore serialized data files
+*.dat
+
+# Ignore CMake files (if using CMake)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+# Ignore VS Code files
+.vscode/
+c_cpp_properties.json
+launch.json
+settings.json
+tasks.json
+
+# Ignore logs & temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
