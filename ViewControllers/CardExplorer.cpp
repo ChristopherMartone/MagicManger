@@ -24,7 +24,7 @@ CardExplorer::CardExplorer(const std::string& title, const std::vector<Card>& ca
                     debugLabel->setText("Selected: " + selectedItem->text());
                     
                     Card card = selectedItem->data(Qt::UserRole).value<Card>();
-                    debugLabel2->setText("CardColor: " + QString::fromStdString(card.getColors()));
+                    debugLabel2->setText("CardColor: " + QString::fromStdString(card.colors));
                 }
             });
 
@@ -36,7 +36,7 @@ CardExplorer::CardExplorer(const std::string& title, const std::vector<Card>& ca
 }
 
 void CardExplorer::addCard(const Card& card) {
-    QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(card.getName()), listWidget);
+    QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(card.name), listWidget);
     item->setData(Qt::UserRole, QVariant::fromValue(card));
 }
 
