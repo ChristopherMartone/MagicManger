@@ -95,6 +95,6 @@ const std::vector<Card>& Collection::getCards() const {
 void Collection::getCardNames(std::vector<std::string>& outNames) const {
     outNames.clear();
     for (const Card& card : cards) {
-        outNames.push_back(card.getName());
+        outNames.push_back(card.name);
     }
 }

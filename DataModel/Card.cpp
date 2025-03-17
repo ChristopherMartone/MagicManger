@@ -1,24 +1,23 @@
 #include "Card.hpp"
 
-Card::Card(const std::string& name, const std::string& colorIdentity, const std::string& colors, const int convertedManaCost, const bool isFunny, const std::string& manaCost, const int manaValue, const std::vector<std::string>& subTypes, const std::vector<std::string>& superTypes, const std::string& text, const std::vector<std::string>& types)
-    : name(name), colorIdentity(colorIdentity), colors(colors), convertedManaCost(convertedManaCost), isFunny(isFunny), manaCost(manaCost), manaValue(manaValue), subTypes(subTypes), superTypes(superTypes), text(text), types(types) {}
+// ✅ Parameterized Constructor
+Card::Card(const std::string& name, const std::string& colorIdentity, const std::string& colors, int convertedManaCost, 
+           bool isFunny, const std::string& manaCost, int manaValue, const std::vector<std::string>& subTypes, 
+           const std::vector<std::string>& superTypes, const std::string& text, const std::vector<std::string>& types)
+    : name(name), colorIdentity(colorIdentity), colors(colors), convertedManaCost(convertedManaCost), 
+      isFunny(isFunny), manaCost(manaCost), manaValue(manaValue), subTypes(subTypes), 
+      superTypes(superTypes), text(text), types(types) {}
 
 bool Card::operator==(const Card& other) const {
-    return name == other.name &&
-           colorIdentity == other.colorIdentity &&
-           colors == other.colors &&
-           convertedManaCost == other.convertedManaCost &&
-           isFunny == other.isFunny &&
-           manaCost == other.manaCost &&
-           manaValue == other.manaValue &&
-           subTypes == other.subTypes &&
-           superTypes == other.superTypes &&
-           text == other.text &&
-           types == other.types; 
+    return name == other.name && colorIdentity == other.colorIdentity && colors == other.colors &&
+           convertedManaCost == other.convertedManaCost && isFunny == other.isFunny &&
+           manaCost == other.manaCost && manaValue == other.manaValue &&
+           subTypes == other.subTypes && superTypes == other.superTypes &&
+           text == other.text && types == other.types;
 }
 
-// Helper function to convert std::vector<std::string> to QStringList
-QStringList vectorToQStringList(const std::vector<std::string>& vec) {
+// Helper Functions for Serializing/Deserializing std::vector<std::string>
+static QStringList vectorToQStringList(const std::vector<std::string>& vec) {
     QStringList list;
     for (const auto& str : vec) {
         list.append(QString::fromStdString(str));
@@ -26,8 +25,7 @@ QStringList vectorToQStringList(const std::vector<std::string>& vec) {
     return list;
 }
 
-// Helper function to convert QStringList to std::vector<std::string>
-std::vector<std::string> qStringListToVector(const QStringList& list) {
+static std::vector<std::string> qStringListToVector(const QStringList& list) {
     std::vector<std::string> vec;
     for (const auto& str : list) {
         vec.push_back(str.toStdString());
@@ -35,7 +33,7 @@ std::vector<std::string> qStringListToVector(const QStringList& list) {
     return vec;
 }
 
-// Save Card to QDataStream
+// Save / Load Card to / from QDataStream
 QDataStream& operator<<(QDataStream& out, const Card& card) {
     out << QString::fromStdString(card.name);
     out << QString::fromStdString(card.colorIdentity);
@@ -51,7 +49,7 @@ QDataStream& operator<<(QDataStream& out, const Card& card) {
     return out;
 }
 
-// Load Card from QDataStream
+
 QDataStream& operator>>(QDataStream& in, Card& card) {
     QString qName, qColorIdentity, qColors, qManaCost, qText;
     qint32 qConvertedManaCost, qManaValue;
@@ -74,48 +72,4 @@ QDataStream& operator>>(QDataStream& in, Card& card) {
     card.types = qStringListToVector(qTypes);
 
     return in;
-}
-
-const std::string& Card::getName() const {
-    return name;
-}
-
-std::string& Card::getColorIdentity() {
-    return colorIdentity;
-}
-
-std::string& Card::getColors() {
-    return colors;
-}
-
-int Card::getConvertedManaCost() {
-    return convertedManaCost;
-}
-
-bool Card::getIsFunny() {
-    return isFunny;
-}
-
-std::string& Card::getManaCost() {
-    return manaCost;
-}
-
-int Card::getManaValue() {
-    return manaValue;
-}
-
-std::vector<std::string>& Card::getSubTypes() {
-    return subTypes;
-}
-
-std::vector<std::string>& Card::getSuperTypes() {
-    return superTypes;
-}
-
-std::string& Card::getText() {
-    return text;
-}
-
-std::vector<std::string>& Card::getTypes() {
-    return types;
 }
