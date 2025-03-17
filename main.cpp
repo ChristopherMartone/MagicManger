@@ -11,6 +11,7 @@
 #include "string"
 #include <QFile>
 #include <iostream> 
+#include "ViewControllers/DeckExplorer.hpp"
 
 
 void printMemoryUsage() {
@@ -101,8 +102,8 @@ int main(int argc, char *argv[]) {
     // Create Deck Manager Tab
     QWidget *deckManagerTab = new QWidget();
     QVBoxLayout *deckManagerLayout = new QVBoxLayout(deckManagerTab);
-    QLabel *label3 = new QLabel("This tab does not use the subview");
-    deckManagerLayout->addWidget(label3);
+    DeckExplorer *deckExplorer = new DeckExplorer("Deck Explorer");
+    deckManagerLayout->addWidget(deckExplorer);
 
     // Add the tabs to the QTabWidget
     tabWidget->addTab(allCardsTab, "Card Explorer");

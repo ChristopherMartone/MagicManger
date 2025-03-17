@@ -7,12 +7,13 @@ TARGET = MagicManager
 SOURCES += \
     main.cpp \
     ./ViewControllers/CardExplorer.cpp \
+    ./ViewControllers/DeckExplorer.cpp \
     ./DataModel/Card.cpp \
     ./DataModel/Collection.cpp \
-    ./AssetManagers/DatabaseManager.cpp \
-    ./Utils/DateTime.cpp \
     ./DataModel/Deck.cpp \
-    ./DataModel/DeckManager.cpp
+    ./DataModel/DeckManager.cpp \
+    ./AssetManagers/DatabaseManager.cpp \
+    ./Utils/DateTime.cpp
 
 # Directories
 QT += core gui widgets network multimedia sql charts qml quick
